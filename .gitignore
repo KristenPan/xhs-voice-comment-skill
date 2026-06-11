@@ -1,0 +1,22 @@
+.DS_Store
+
+# Python/runtime artifacts
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Local exports and test outputs
+xhs_audio_exports/
+downloads/
+*_test/
+*_export/
+*.mp3
+*.wav
+*.mp4
+xhs_voice_comment_manifest.json
+
+# Editor files
+.idea/
+.vscode/
+*.swp
