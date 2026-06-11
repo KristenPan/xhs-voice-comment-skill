@@ -1,8 +1,10 @@
-# XHS Voice Comment Skill
+# XHS Voice Comment Tool Skill
 
-一个 Codex skill，用来把小红书语音评论分享链接、复制分享文案、二维码分享图，或者直接的 `sns-video-v2.xhscdn.com` 音频链接，导出为本地 `MP3` 和 `WAV` 文件。
+一个面向 AI 编程代理的通用 tool skill，用来把小红书语音评论分享链接、复制分享文案、二维码分享图，或者直接的 `sns-video-v2.xhscdn.com` 音频链接，导出为本地 `MP3` 和 `WAV` 文件。
 
-它的目标是让使用者尽量少配置：普通链接和直链只依赖 Python；二维码识别、精准评论定位、音频转码等能力会在需要时自动准备到 skill 本地的 `.venv` 中。
+它不是 Codex 专属能力，而是一个可移植的 `SKILL.md` + 脚本包：支持目录式 skills 的代理可以直接挂载使用，例如 Codex、Claude Code/Cloud Code、Hermes 或其他兼容实现；不支持 skill 目录的环境也可以直接调用 `scripts/xhs-voice`。
+
+它的目标是让使用者尽量少配置：普通链接和直链只依赖 Python；二维码识别、精准评论定位、音频转码等能力会在需要时自动准备到 tool skill 本地的 `.venv` 中。
 
 ## 能做什么
 
@@ -20,23 +22,35 @@
 1. 在小红书评论区找到想保存的语音评论，长按这条语音评论。
 2. 在弹出的分享菜单里点击“分享到微信”。
 3. 在微信对话框里打开这张分享卡片图片，并保存图片至本地相册。
-4. 把保存下来的图片上传给 Codex，或把图片路径传给脚本。
+4. 把保存下来的图片上传给你的代理工具，或把图片路径传给脚本。
 
-这张图片里通常包含小红书短链二维码。skill 会先识别二维码，再解析分享链接，定位对应的语音评论并导出音频文件。
+这张图片里通常包含小红书短链二维码。tool skill 会先识别二维码，再解析分享链接，定位对应的语音评论并导出音频文件。
 
-## 安装到 Codex
+## 安装到代理工具
 
 ```bash
 git clone https://github.com/<your-github-name>/xhs-voice-comment-skill.git
-mkdir -p ~/.codex/skills
-cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.codex/skills/
 ```
 
-安装后，向 Codex 提供小红书语音评论分享图、分享链接或直链时，这个 skill 会自动触发。
+把 `skills/xhs-voice-comment` 复制到对应代理工具的 skills 目录即可。常见安装方式：
 
-## 在 Codex 里使用
+```bash
+# Codex
+mkdir -p ~/.codex/skills
+cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.codex/skills/
 
-安装完成后，可以直接把图片拖进 Codex，或者在消息里提供图片路径：
+# Claude Code / Cloud Code
+mkdir -p ~/.claude/skills
+cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.claude/skills/
+```
+
+如果 Hermes 或其他代理使用不同的 skills 目录，把同一个 `skills/xhs-voice-comment` 文件夹放到它配置的目录中即可。核心约定是：代理能读取 `SKILL.md`，并能运行 `scripts/xhs-voice`。
+
+安装后，向代理工具提供小红书语音评论分享图、分享链接或直链时，这个 tool skill 就可以触发或被调用。
+
+## 在代理里使用
+
+安装完成后，可以直接把图片拖进代理对话框，或者在消息里提供图片路径：
 
 ```text
 帮我把这张小红书语音评论分享图转成 MP3 和 WAV。
@@ -55,7 +69,7 @@ cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.codex/skills/
 阿潘阿豚咪走啊.wav
 ```
 
-如果分享链接带有 `anchorCommentId`，skill 会优先精准定位这条被分享的语音评论。找不到目标评论时会停止并提示原因，不会随便下载页面上的其他候选语音。
+如果分享链接带有 `anchorCommentId`，tool skill 会优先精准定位这条被分享的语音评论。找不到目标评论时会停止并提示原因，不会随便下载页面上的其他候选语音。
 
 ## 直接运行脚本
 
@@ -133,4 +147,4 @@ XHS_VOICE_NO_AUTO_SETUP=1 skills/xhs-voice-comment/scripts/xhs-voice "<输入>"
 
 ## GitHub 仓库简介建议
 
-Codex skill for exporting Xiaohongshu voice comments from share links or QR images to MP3 and WAV.
+Tool skill for exporting Xiaohongshu voice comments from share links, QR images, or direct audio URLs to local MP3 and WAV files.
