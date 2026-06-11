@@ -13,7 +13,7 @@
 - 读取评论里的 `audioInfo.playInfo.url` 音频地址。
 - 对带 `anchorCommentId` 的分享链接，使用小红书 H5 签名评论分页定位被分享的那一条语音评论。
 - 默认同时保存 `.mp3` 和 `.wav`，并删除内部临时 MP4。
-- 默认用 ASR 文本或评论文本作为文件名，例如 `阿潘阿豚咪走啊.mp3`。
+- 默认用语音评论的 ASR 文本作为文件名；如果 ASR 文本不可用，再回退到评论文本或元数据命名。
 
 ## 获取小红书语音评论分享图
 
@@ -62,12 +62,7 @@ cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.claude/skills/
 帮我下载这个小红书语音评论，并保存成 MP3 和 WAV：https://xhslink.com/...
 ```
 
-默认输出会保存在 `xhs_audio_exports/`，并且只保留两个最终音频文件：
-
-```text
-阿潘阿豚咪走啊.mp3
-阿潘阿豚咪走啊.wav
-```
+默认输出会保存在 `xhs_audio_exports/`，并且只保留两个最终音频文件：一个 `.mp3` 和一个 `.wav`。文件名默认来自语音评论的 ASR 文本。
 
 如果分享链接带有 `anchorCommentId`，tool skill 会优先精准定位这条被分享的语音评论。找不到目标评论时会停止并提示原因，不会随便下载页面上的其他候选语音。
 
@@ -79,12 +74,7 @@ cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.claude/skills/
 skills/xhs-voice-comment/scripts/xhs-voice "<小红书分享链接或图片路径>" -o xhs_audio_exports
 ```
 
-默认会同时生成 MP3 和 WAV：
-
-```text
-xhs_audio_exports/阿潘阿豚咪走啊.mp3
-xhs_audio_exports/阿潘阿豚咪走啊.wav
-```
+默认会同时生成 MP3 和 WAV，文件名默认来自语音评论的 ASR 文本。
 
 只导出单一格式：
 
