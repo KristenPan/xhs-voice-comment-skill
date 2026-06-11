@@ -24,7 +24,7 @@ Use this skill when the user sends a Xiaohongshu voice-comment share link, copie
    scripts/xhs-voice "<share link or image path>" -f wav -o xhs_audio_exports
    ```
 
-3. Filename defaults to the voice comment ASR text. For example, ASR `阿潘阿豚咪走啊` saves as `阿潘阿豚咪走啊.mp3` and `阿潘阿豚咪走啊.wav`. Use `--name-source metadata` only when ASR-based names are not desired.
+3. Filename defaults to the voice comment ASR text. If ASR text is unavailable, the script falls back to comment text or metadata. Use `--name-source metadata` only when ASR-based names are not desired.
 
 4. If multiple audio candidates are found, read the candidate list printed by the script. Use `--index N`, `--match TEXT`, or `--all` only when needed.
 
