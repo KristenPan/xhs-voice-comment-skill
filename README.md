@@ -2,7 +2,7 @@
 
 一个面向 AI 编程代理的通用 tool skill，用来把小红书语音评论分享链接、复制分享文案、二维码分享图，或者直接的 `sns-video-v2.xhscdn.com` 音频链接，导出为本地 `MP3` 和 `WAV` 文件。
 
-它不是 Codex 专属能力，而是一个可移植的 `SKILL.md` + 脚本包：支持目录式 skills 的代理可以直接挂载使用，例如 Codex、Claude Code/Cloud Code、Hermes 或其他兼容实现；不支持 skill 目录的环境也可以直接调用 `scripts/xhs-voice`。
+它不是 Codex 专属能力，而是一个可移植的 `SKILL.md` + 脚本包：支持目录式 skills 的代理可以直接挂载使用，例如 Codex、Claude Code、Hermes 或其他兼容实现；不支持 skill 目录的环境也可以直接调用 `scripts/xhs-voice`。
 
 它的目标是让使用者尽量少配置：普通链接和直链只依赖 Python；二维码识别、精准评论定位、音频转码等能力会在需要时自动准备到 tool skill 本地的 `.venv` 中。
 
@@ -39,7 +39,7 @@ git clone https://github.com/<your-github-name>/xhs-voice-comment-skill.git
 mkdir -p ~/.codex/skills
 cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.codex/skills/
 
-# Claude Code / Cloud Code
+# Claude Code
 mkdir -p ~/.claude/skills
 cp -R xhs-voice-comment-skill/skills/xhs-voice-comment ~/.claude/skills/
 ```
