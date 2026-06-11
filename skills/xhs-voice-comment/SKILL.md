@@ -5,7 +5,7 @@ metadata:
   short-description: Export XHS voice comments to local audio files
 ---
 
-# XHS Voice Comment
+# XHS Voice Comment Tool Skill
 
 Use this skill when the user sends a Xiaohongshu voice-comment share link, copied share text, direct `sns-video-v2.xhscdn.com` audio URL, or a share-card image containing a QR code.
 
@@ -44,7 +44,7 @@ Use this skill when the user sends a Xiaohongshu voice-comment share link, copie
 
 ## Dependencies And Fallbacks
 
-- The skill package is intentionally lightweight. `scripts/xhs-voice` creates a local `.venv` that can reuse system-installed packages, then installs missing capabilities only when the current task needs them.
+- The tool skill package is intentionally lightweight. `scripts/xhs-voice` creates a local `.venv` that can reuse system-installed packages, then installs missing capabilities only when the current task needs them.
 - Plain copied links and direct `sns-video` URLs usually need only Python 3.
 - QR-code image inputs first try existing `cv2` or `zbarimg`; if neither is available, the wrapper installs `opencv-python-headless` into the skill-local `.venv`.
 - Exact `anchorCommentId` lookup first tries existing Playwright; if missing, the wrapper installs Playwright and Chromium into the skill-local `.venv`.
