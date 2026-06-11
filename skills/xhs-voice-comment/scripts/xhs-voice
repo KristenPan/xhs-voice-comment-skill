@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+VENV_PY="$ROOT/.venv/bin/python"
+
+python3 "$ROOT/scripts/bootstrap_local.py" --ensure-venv --quiet
+
+exec "$VENV_PY" "$ROOT/scripts/xhs_voice_comment.py" "$@"
