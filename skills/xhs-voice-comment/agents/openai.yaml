@@ -1,0 +1,3 @@
+display_name: XHS Voice Comment
+short_description: Export Xiaohongshu voice-comment audio to local MP3 and WAV files.
+default_prompt: Convert this Xiaohongshu voice-comment share link or QR image into local MP3 and WAV files.
